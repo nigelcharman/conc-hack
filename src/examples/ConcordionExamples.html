@@ -1,0 +1,141 @@
+<html xmlns:c="http://www.concordion.org/2007/concordion">
+<link href="../concordion.css" rel="stylesheet" type="text/css" />
+<head><title>Concordion Command Examples</title></head>
+<body>
+
+<h1>Concordion Command Examples</h1>
+<h3>Basic example</h3>
+<p>Demonstrates the usage of <code>set</code> and <code>assertEquals</code> commands.</p>
+<div class="example">
+<span c:set="#x">1</span> + <span c:set="#y">2</span> = <span c:assertEquals="add(#x, #y)">3</span>.
+</div>
+
+<h3>Set and assert in same statement</h3>
+<p>Occasionally it is useful to be able to set and assert a value in the same statement, 
+for example selecting a user name and then checking that the user name is displayed.  
+This can be achieved using the special variable <code>#TEXT</code>, which contains the text of the current element.</p>
+<div class="example">
+<p>Example: My name is <span c:assertEquals="setAndReturn(#TEXT)">Michael Caine</span></p>
+</div>
+
+<h3>Example with execute</h3>
+<p>The <code>execute</code> command can return void, a primitive, a POJO (plain old Java object) or a map.</p>
+<p>An <code>execute</code> with a <code>void</code> result often indicates a "bad smell". 
+See <a href="http://concordion.org/Tutorial.html#executeVoid">executeVoid</a>.</p>
+<p>This example uses the <code>execute</code> commands for instructions with <code>void</code> results and primitive results.</p>
+<p>This example also shows the use of the special variable <code>#TEXT</code>, 
+which contains the text of the current element. 
+<code>#TEXT</code> can also be used with assert commands.</p>
+<div class="example">
+<span c:execute="setMemory(#TEXT)">3</span> + 
+<span c:execute="#result = addToMemory(#TEXT)">4</span> = 
+<span c:assertEquals="#result">7</span>.
+</div>
+
+<h3>Example with execute returning a POJO</h3>
+<p>Subsequent commands can access public fields and methods of the object. When using a property (dot) notation, 
+Concordion will first check for a public field with the property name, then for a corresponding getter. 
+In the following example, <code>#detail.gst</code> resolves to a call to the <code>getGst()</code> method. </p>
+<div class="example">
+<span c:execute="#detail = getInvoiceDetail()">The invoice </span> show a sub-total of 
+$<span c:assertEquals="#detail.subTotal">100</span> + GST of 
+$<span c:assertEquals="#detail.gst">15</span> giving a total of 
+$<span c:assertEquals="#detail.calculateTotal()">115</span>.
+</div>
+
+<h3>Example with execute returning a map</h3>
+<div class="example">
+<span c:execute="#detail = getInvoiceDetailAsMap()">The invoice </span> show a sub-total of 
+$<span c:assertEquals="#detail.subTotal">100</span> + GST of 
+$<span c:assertEquals="#detail.gst">15</span>.
+</div>
+
+<h3>Back to front - failing</h3>
+<p>This fails since <code>x3</code> and <code>y3</code> are not assigned until after they are referenced in 
+<code>assertEquals</code> </p>
+<div class="example">
+<span c:assertEquals="add(#x3, #y3)">11</span> = <span c:set="#x3">6</span> + <span c:set="#y3">5</span>.
+</div>
+
+<h3>Back to front - passing</h3>
+<p>Unusual sentences can be resolved by using an <code>execute</code> command as a parent element.  
+(However it may be preferable to just rephrase the sentence!).</p>
+<p>The <code>set</code> commands of child elements are called first, 
+followed by its own <code>execute</code> command, 
+followed by the <code>execute</code> commands of child elements, 
+then the <code>assertEquals</code> commands of child elements. 
+See <a href="http://concordion.org/Tutorial.html#executeUnusualSentences">executeUnusualSentences</a>.</p>
+<div class="example" c:execute="#z3 = add(#x3, #y3)" >
+<span c:assertEquals="#z3">11</span> = <span c:set="#x3">6</span> + <span c:set="#y3">5</span>.
+</div>
+
+<h3>Boolean results</h3>
+<p>Avoid using <code>assertTrue</code> and <code>assertFalse</code>, 
+since the failure message is not descriptive.</p>
+
+<h4>Example 1</h4>
+<div class="example" >
+Red <span c:assertTrue="redIsNewBlack()">is the new black</span>.
+</div>
+
+<p>As an alternative, Concordion allows you to use ternary operator in assertions, 
+eg <code>c:assertEquals="redIsNewBlack() ? 'is' : 'is not'"</code></p>
+<div class="example">
+Red <span c:assertEquals="redIsNewBlack() ? 'is' : 'is not' ">is</span> the new black.
+</div>
+
+<h4>Example 2</h4>
+<div class="example">
+The system displays <span c:assertTrue="showsCurrentDate()">the current date</span>.
+</div>
+
+<p>Using <code>assertEquals</code> allows us to provide better error details:</p>
+<div class="example">
+The system displays <span c:assertEquals="getDateShown()">the current date</span>.
+</div>
+
+<h3>Execute on a table</h3>
+<p>When you place an execute command on a &lt;table&gt; element the commands on the header row 
+(the row containing &lt;th&gt; elements) are copied to each detail row (rows containing &lt;td&gt; elements) 
+and the execute  command is run on each detail row.</p> 
+<div class="example">
+<p>Example: Adding <i>Number 1</i> to <i>Number 2</i> equals the <i>Result</i>:</p>
+<table c:execute="#z=add(#x,#y)">
+<tr><th c:set="#x">Number 1</th><th c:set="#y">Number 2</th><th c:assertEquals="#z">Result</th></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>-3</td><td>-2</td></tr>
+</table>
+</div>
+
+<h3>Verify Rows</h3>
+<p>Checks a collection of results returned from the fixture.  
+The collection must be sorted and implement <code>java.lang.Iterable</code>.</p>
+<p>It may be necessary to sort the collection in the fixture if it is not already sorted.</p> 
+<div class="example">
+<p>Example: Invoice details are:</p>
+<table c:verifyRows="#detail : getInvoiceDetails()">
+<tr><th c:assertEquals="#detail.subTotal">Sub Total</th><th c:assertEquals="#detail.gst">GST</th></tr>
+<tr><td>100</td><td>15</td></tr>
+<tr><td>500</td><td>75</td></tr>
+<tr><td>20</td><td>3</td></tr>
+</table>
+</div>
+
+<h3>Echo</h3>
+<p>Normally used for adding information about a test run:</p> 
+<div class="example">
+Tests executed using <span c:echo="getBrowserDetails()"></span>.
+</div>
+
+<h3>Run</h3>
+<p>Runs another test from this test. See <a href="http://concordion.org/dist/1.3.1/test-output/concordion/spec/concordion/command/run/Run.html">Run command</a>.</p>
+<p>We are using this from our "index" pages, with a custom <code>RunOnceRunner</code> class 
+to ensure each test is only run once, and the results cached.</p> 
+
+<h3>Accessing contents of an HREF</h3>
+<p>Allows you to put test data in a separate file and access it from a specification.  
+This may indicate a "test smell".  
+See <a href="http://concordion.org/dist/1.3.1/test-output/concordion/spec/concordion/command/execute/AccessToLinkHref.html">Access to a Link's HREF</a>.</p>
+
+</body>
+</html>
