@@ -1,8 +1,13 @@
 apply plugin: 'java'
 
+wrapper {
+    gradleVersion = "2.4"
+}
+
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     testCompile 'org.concordion:concordion:1.5.0'
