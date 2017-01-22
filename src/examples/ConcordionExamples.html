@@ -6,7 +6,7 @@
 <h1>Concordion Command Examples</h1>
 <h3>Basic example</h3>
 <p>Demonstrates the usage of <code>set</code> and <code>assertEquals</code> commands.</p>
-<div class="example">
+<div c:example="example1">
 <span c:set="#x">1</span> + <span c:set="#y">2</span> = <span c:assertEquals="add(#x, #y)">3</span>.
 </div>
 
@@ -125,6 +125,11 @@ The collection must be sorted and implement <code>java.lang.Iterable</code>.</p>
 <p>Normally used for adding information about a test run:</p> 
 <div class="example">
 Tests executed using <span c:echo="getBrowserDetails()"></span>.
+Public ten is <span c:assertEquals="ten">10</span>.
+Setting ten to <span c:execute="ten=#TEXT">7</span>.
+Public ten is <span c:assertEquals="ten">10</span>.
+Public ten is <span c:echo="ten"></span>.
+Private nine is <span c:echo="nine"></span>.
 </div>
 
 <h3>Run</h3>
