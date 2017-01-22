@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <meta http-equiv="content-type" content="text/html; "/>
+    <link href="concordion.css" rel="stylesheet" type="text/css"/>
+    <link href="spsc.css" rel="stylesheet" type="text/css"/>
+</head>
+<body class="OwnerJoe">
+
+<h1>WebForms WFDS Specifications</h1>
+
+<p>The inputs to the tests haves no background color and the results of the tests have a background color (green for pass and red for fail).</p>
+
+<h2>Tests</h2>
+<ul>
+    <li><a concordion:run="concordion" href="biz/glacier/StyleDAO.html">StyleDAO</a></li>
+</ul>
+
+<h1>Beans</h1>
+
+<table concordion:execute="#result = getBeanClass(#beanName)">
+    <tr>
+        <th concordion:set="#beanName">Bean Name</th>
+        <th concordion:assertEquals="#result">Bean Class</th>
+    </tr>
+    <tr>
+        <td>Encoder</td>
+        <td>sps.wfds.web.util.StyledXMLEncoder</td>
+    </tr>
+</table>
+
+</body>
+</html>

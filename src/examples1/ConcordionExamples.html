@@ -1,0 +1,20 @@
+<html xmlns:c="http://www.concordion.org/2007/concordion">
+<link href="../concordion.css" rel="stylesheet" type="text/css" />
+<head><title>Concordion Command Examples</title></head>
+<body>
+
+<h3>Execute on a table</h3>
+<p>When you place an execute command on a &lt;table&gt; element the commands on the header row 
+(the row containing &lt;th&gt; elements) are copied to each detail row (rows containing &lt;td&gt; elements) 
+and the execute  command is run on each detail row.</p> 
+<div class="example">
+<p>Example: Adding <i>Number 1</i> to <i>Number 2</i> equals the <i>Result</i>:</p>
+<table c:execute="add()">
+<tr><th c:set="#x">Number 1</th><th c:execute="#z=add(#x, #TEXT)">Number 2</th><th c:assertEquals="#z">Result</th></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>-3</td><td>-2</td></tr>
+</table>
+</div>
+
+</body>
+</html>

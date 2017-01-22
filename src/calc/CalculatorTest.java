@@ -1,4 +1,4 @@
-package examples;
+package calc;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,19 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.concordion.api.ExpectedToFail;
-import org.concordion.api.FullOGNL;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.runner.RunWith;
 
 @RunWith(ConcordionRunner.class)
-@ExpectedToFail
-@FullOGNL
-public class ConcordionExamples {
+public class CalculatorTest {
 	
     private int memory;
-    public int ten = 10;
-    protected int nine = 9;
 
 	public int add(int a, int b) {
 		return a + b;

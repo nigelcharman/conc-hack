@@ -1,0 +1,19 @@
+<html xmlns:c="http://www.concordion.org/2007/concordion">
+<link href="../concordion.css" rel="stylesheet" type="text/css" />
+<head><title>Calculator</title></head>
+<body>
+    <h1>Calculator</h1>
+    <p>As a lazy user, I want a calculator to add up, so I don't have to think.</p>
+    <h3>Acceptance Criteria</h3>
+    <ul>
+        <li>The calculator adds numbers correctly</li>
+    </ul>
+    <div class="example">
+        <h4>Basic Example</h4>
+        <p>
+            <span concordion:set='#a'>2</span> + <span concordion:set='#b'>4</span>
+            = <span concordion:assertEquals='add(#a,#b)'>6</span>
+        </p>
+    </div>
+</body>
+</html>

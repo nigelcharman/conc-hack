@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<link href="../../spsc.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="OwnerJoe">
+
+	<h1>WebForms WFDS StyleDAO Specifications</h1>
+
+	<table
+		concordion:execute="#result = get(#formNumber, #requestedStyle, #formViewType, #absolutePath)">
+		<tr>
+			<th concordion:set="#formNumber">Form Number</th>
+			<th concordion:set="#requestedStyle">Requested Style</th>
+			<th concordion:set="#formViewType">Form View Type</th>
+			<th concordion:set="#absolutePath">Absolute Path</th>
+			<th concordion:assertEquals="#result">Path</th>
+		</tr>
+		<tr>
+			<td>810</td>
+			<td></td>
+			<td></td>
+			<td>false</td>
+			<td>styleRoot/wfds/xtencils/810style.xsl</td>
+		</tr>
+		<tr>
+			<td>850</td>
+			<td></td>
+			<td></td>
+			<td>true</td>
+			<td>styleRoot/wfds/xtencils/850style.xsl</td>
+		</tr>
+		<tr>
+			<td>856</td>
+			<td>hub/856style.xsl</td>
+			<td></td>
+			<td>false</td>
+			<td>styleRoot/hub/856style.xsl</td>
+		</tr>
+		<tr>
+			<td>856</td>
+			<td>hub/856style.xsl</td>
+			<td></td>
+			<td>true</td>
+			<td>styleRoot/hub/856style.xsl</td>
+		</tr>
+		<tr>
+			<td>856</td>
+			<td>hub/SL-pdf.xsl</td>
+			<td>SL</td>
+			<td>false</td>
+			<td>styleRoot/hub/SL-pdf.xsl</td>
+		</tr>
+	</table>
+
+</body>
+</html>

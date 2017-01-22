@@ -1,4 +1,4 @@
-package examples;
+package examples1;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,20 +6,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.concordion.api.ExpectedToFail;
-import org.concordion.api.FullOGNL;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.runner.RunWith;
 
 @RunWith(ConcordionRunner.class)
-@ExpectedToFail
-@FullOGNL
 public class ConcordionExamples {
 	
     private int memory;
-    public int ten = 10;
-    protected int nine = 9;
+    private int x;
+    private int y;
 
+    public void setX(int x) {
+        System.out.println("x,y = " + this.x + "," + this.y);
+        System.out.println("setting x to " + x);
+        this.x = x;
+    }
+    
+    public void setY(int y) {
+        System.out.println("x,y = " + this.x + "," + this.y);
+        System.out.println("setting y to " + y);
+        this.y = y;
+    }
+
+    public int add() {
+        System.out.println("adding");
+        System.out.println("x,y = " + this.x + "," + this.y);
+        return x + y;
+    }
+    
 	public int add(int a, int b) {
 		return a + b;
 	}

@@ -1,0 +1,48 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+<h1>Basic Sums</h1>
+
+<p>As a business customer I want to automate my basic sums so that I can get correct answers quickly.</p> 
+
+<h3>Acceptance Criteria</h3>
+
+<ol>
+<li>I can add, subtract, multiply or divide any two numbers.</li>
+</ol> 
+
+<div class="example">
+<h4>Example</h4>
+<p>Calculating the following sums shows the expected result.</p>
+<table>
+  <tr>
+    <th>Sum</th>
+    <th>Expected Result</th>
+  </tr>
+  <tr>
+    <td>9 * 7</td>
+    <td concordion:assertTrue="isTrue()">9 * 7 = 63</td>
+  </tr>
+  <!-- tr>
+    <td>15 + 27</td>
+    <td concordion:assertFalse="isTrue()">15 + 27 = 42</td>
+  </tr-->
+  <tr>
+    <td>39 / 3</td>
+    <td concordion:assertTrue="isTrue()">39 / 3 = 13</td>
+  </tr>
+  <tr>
+    <td>8 - 14</td>
+    <td>8 - 14 = -6</td>
+  </tr>
+  <tr>
+    <td>1 / 0</td>
+    <td>1 / 0 = NaN</td>
+  </tr>
+</table>
+
+</div>
+
+</body>
+</html>

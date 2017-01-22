@@ -1,0 +1,34 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+<table concordion:verifyRows="#person : getPeople()">
+    <tr>
+        <th concordion:assertEquals="#person.firstName">First Name</th>
+        <th concordion:assertEquals="#person.lastName">Last Name</th>
+        <th concordion:assertEquals="#person.birthYear">Birth Year</th>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Travolta</td>
+        <td>1066</td>
+    </tr>
+    <tr>
+        <td>Michael</td>
+        <td>Jackson</td>
+        <td>1958</td>
+    </tr>
+<!--     <tr>
+        <td>Britney</td>
+        <td>Spears</td>
+        <td>1981</td>
+    </tr>
+    <tr>
+        <td>Mick</td>
+        <td>Jagger</td>
+        <td>1943</td>
+    </tr>
+     -->
+</table>
+</body>
+</html>
